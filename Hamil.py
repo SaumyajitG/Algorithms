@@ -5,7 +5,7 @@ class Graph():
         self.V = vertices
 
 
-    def isSafe(self, v, pos, path):
+    def Safe(self, v, pos, path):
 
         if self.graph[path[pos - 1]][v] == 0:
             return False
@@ -18,7 +18,7 @@ class Graph():
         return True
 
 
-    def hamCycleUtil(self, path, pos):
+    def hamUtil(self, path, pos):
 
 
         if pos == self.V:
@@ -31,10 +31,10 @@ class Graph():
 
         for v in range(1, self.V):
 
-            if self.isSafe(v, pos, path) == True:
+            if self.Safe(v, pos, path) == True:
                 path[pos] = v
 
-                if self.hamCycleUtil(path, pos + 1) == True:
+                if self.hamUtil(path, pos + 1) == True:
                     return True
 
 
@@ -48,7 +48,7 @@ class Graph():
 
         path[0] = 0
 
-        if self.hamCycleUtil(path, 1) == False:
+        if self.hamUtil(path, 1) == False:
             print "Solution does not exist\n"
             return False
 
@@ -56,28 +56,28 @@ class Graph():
         return True
 
     def printSolution(self, path):
-        print "Solution Exists: Following is one Hamiltonian Cycle"
+        print "Solution Exists: Following is a Hamiltonian Cycle"
         for vertex in path:
             print vertex,
         print path[0], "\n"
 
 
-# Driver Code
+
+print "Enter no of Vertices : "
+ver=input()
 
 
-g1 = Graph(5)
-g1.graph = [[0, 1, 0, 1, 0], [1, 0, 1, 1, 1],
-            [0, 1, 0, 0, 1, ], [1, 1, 0, 0, 1],
-            [0, 1, 1, 1, 0], ]
+graph1 = Graph(ver)
 
-# Print the solution
-g1.hamCycle();
+print "Enter Adjacency Matrix"
+mat=[[0 for j in range(ver)] for i in range(ver)]
 
+print mat
+for i in range (0,ver):
+  for j in range (0,ver):
+    print "Entry in row: ",i+1," column: ",j+1
+    mat[i][j] = input()
 
-g2 = Graph(5)
-g2.graph = [[0, 1, 0, 1, 0], [1, 0, 1, 1, 1],
-            [0, 1, 0, 0, 1, ], [1, 1, 0, 0, 0],
-            [0, 1, 1, 0, 0], ]
+graph1.graph = mat
 
-# Print the solution
-g2.hamCycle();
+graph1.hamCycle();
