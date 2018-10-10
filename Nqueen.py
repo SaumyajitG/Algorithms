@@ -1,11 +1,11 @@
-global N
+global Size
 print("Enter size of board(N) - ")
-N= input();
+Size= input();
 
 
 def printSolution(board):
-    for i in range(N):
-        for j in range(N):
+    for i in range(Size):
+        for j in range(Size):
             print board[i][j],
         print
 
@@ -15,29 +15,27 @@ def isSafe(board, row, col):
         if board[row][i] == 1:
             return False
 
-    # Check upper diagonal on left side
     for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
         if board[i][j] == 1:
             return False
 
-    # Check lower diagonal on left side
-    for i, j in zip(range(row, N, 1), range(col, -1, -1)):
+    for i, j in zip(range(row, Size, 1), range(col, -1, -1)):
         if board[i][j] == 1:
             return False
 
     return True
 
 
-def solveNQUtil(board, col):
-    if col >= N:
+def solveSizeQUtil(board, col):
+    if col >= Size:
         return True
 
-    for i in range(N):
+    for i in range(Size):
 
         if isSafe(board, i, col):
             board[i][col] = 1
 
-            if solveNQUtil(board, col + 1) == True:
+            if solveSizeQUtil(board, col + 1) == True:
                 return True
 
             board[i][col] = 0
@@ -47,10 +45,10 @@ def solveNQUtil(board, col):
 
 
 
-def solveNQ():
-    board = [[0 for x in range(N)] for y in range(N)]
+def solveSizeQ():
+    board = [[0 for x in range(Size)] for y in range(Size)]
 
-    if solveNQUtil(board, 0) == False:
+    if solveSizeQUtil(board, 0) == False:
         print "Solution does not exist"
         return False
 
@@ -58,4 +56,4 @@ def solveNQ():
     return True
 
 
-solveNQ()
+solveSizeQ()
