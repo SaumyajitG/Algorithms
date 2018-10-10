@@ -1,5 +1,5 @@
 global Size
-print("Enter size of board(N) - ")
+print "Enter size of board(N) - "
 Size= input();
 
 
